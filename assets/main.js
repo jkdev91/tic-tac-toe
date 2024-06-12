@@ -8,8 +8,6 @@ let currentPlayer = 'X';
 // Variable pour vérifier si le jeu est terminé
 let gameOver = false;
 
-
-
 // selectionner les cells du jeu
 const cells = document.querySelectorAll('.cell')
 
@@ -31,7 +29,6 @@ cells.forEach((cell, index) =>
     })
 );
 
-
 // tableau des combinaison gagnant 
 const winningCombinations = [
     [0, 1, 2], [3, 4, 5], [6, 7, 8], // lignes
@@ -39,7 +36,12 @@ const winningCombinations = [
     [2, 4, 6], [0, 4, 8] // diagonales
 ];
 
+
+// selectionner le resultat d'un jeu
+const resultElement = document.querySelector(".result")
+
 function checkWinner() {
+    let  winner = null // variables pour stoké le gagnant 
     // vérifier que les combinaisons gagnante pour le joueur 'X'
     for (let combination of winningCombinations) {
         if(
@@ -47,7 +49,8 @@ function checkWinner() {
             board[combination[1]] === 'X' &&
             board[combination[2]] === 'X' 
         ) {
-            alert('le joueur X a gagné !');
+            winner = 'X'
+            resultElement.textContent = 'le joueur X a gagné !';
             gameOver = true;
             return;
         };
@@ -60,16 +63,18 @@ function checkWinner() {
             board[combination[1]] === 'O' &&
             board[combination[2]] === 'O' 
         ) {
-            alert('le joueur O a gagné !');
+            winner = 'O'
+            resultElement.textContent = 'le joueur O a gagné !'
             gameOver = true;
             return;
         };
     };
-
+    
     // vérifier si une partie est null
     if (!board.includes('')) {
-        alert("c'est une partie nulle")
-        gameOver = true
-        
+        winner = null
+        resultElement.textContent = 'la partie est nulle'
+        gameOver = true  
     };
 };
+
