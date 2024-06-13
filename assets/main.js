@@ -8,6 +8,10 @@ let currentPlayer = 'X';
 // Variable pour vérifier si le jeu est terminé
 let gameOver = false;
 
+// initialiser les scores
+let scoreX = 0 
+let scoreO = 0 
+
 // selectionner les cells du jeu
 const cells = document.querySelectorAll('.cell')
 
@@ -51,6 +55,9 @@ function checkWinner() {
         ) {
             winner = 'X'
             resultElement.textContent = 'le joueur X a gagné !';
+            scoreX++;
+            console.log('x=', scoreX);
+            updateScore();
             gameOver = true;
             return;
         };
@@ -65,6 +72,9 @@ function checkWinner() {
         ) {
             winner = 'O'
             resultElement.textContent = 'le joueur O a gagné !'
+            scoreO++;
+            console.log("O=", scoreO);
+            updateScore();
             gameOver = true;
             return;
         };
@@ -76,5 +86,18 @@ function checkWinner() {
         resultElement.textContent = 'la partie est nulle'
         gameOver = true  
     };
-};
-
+    };
+    
+    // afficher le score du gagnant de la partie
+    const scoreXElement = document.getElementById('scoreX')
+    const scoreOElement = document.getElementById('scoreO')
+    console.log(scoreX, scoreO)
+    console.log(scoreXElement, scoreOElement)
+    
+    
+    function updateScore() {
+        scoreXElement.textContent = scoreX
+        scoreOElement.textContent = scoreO
+    }
+        
+        
