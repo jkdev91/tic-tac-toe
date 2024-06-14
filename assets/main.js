@@ -100,4 +100,26 @@ function checkWinner() {
         scoreOElement.textContent = scoreO
     }
         
+/** gerer la partie suivante du jeu et la mise a zero du jeu **/    
+const nextGame = document.querySelector('.nextgame')
+const newGame = document.querySelector('.newgame')
+
+
+function gameReset() {
+    board = ['', '', '', '', '', '', '', '', ''];
+    currentPlayer = 'X';
+    gameOver = false;
+    resultElement.textContent = '';
+    cells.forEach(cell => cell.textContent = '');
+};
+
+
+function scoreReset() {
+    gameReset();
+    scoreX = 0;
+    scoreO = 0;
+    updateScore();
+};
         
+nextGame.addEventListener('click', gameReset);
+newGame.addEventListener('click', scoreReset);
