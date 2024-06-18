@@ -8,6 +8,10 @@ let currentPlayer = 'X';
 // Variable pour vérifier si le jeu est terminé
 let gameOver = false;
 
+// variables icons
+const xIconPath ="assets/icons/lettre-x.png"
+const oIconPath ="assets/icons/lettre-o.png"
+
 // initialiser les scores
 let scoreX = 0 
 let scoreO = 0 
@@ -20,9 +24,23 @@ cells.forEach((cell, index) =>
     cell.addEventListener('click', () => {
         // verifier si la cellule est vide et que le jeu n'est pas terminé
         if(board[index] == "" && gameOver == false) {
+            const iconElement = document.createElement('img')
+
+            // Utiliser les variables pour définir le chemin d'accès à l'image
+            if (currentPlayer === 'X') {
+                iconElement.src = xIconPath;
+            } else {
+                iconElement.src = oIconPath;
+            }
+
+            iconElement.alt = currentPlayer;
+            iconElement.classList.add("icon");
+
+            cell.appendChild(iconElement)
+
             // mettre a jour le gameboard
             board[index] = currentPlayer;
-            cell.textContent = currentPlayer;
+            // cell.textContent = currentPlayer;
 
             // Changer de joueur
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
